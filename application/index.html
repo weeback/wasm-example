@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Go + WebAssembly Example</title>
+</head>
+<body>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+
+        WebAssembly.instantiateStreaming(fetch('hello.wasm'),
+            go.importObject).then((result) => {
+            go.run(result.instance);
+
+            console.log("Result:", add(2, 3)); // call the 'add' function defined in the Go program
+        });
+
+        // insert JavaScript code here
+
+    </script>
+</body>
+</html>
